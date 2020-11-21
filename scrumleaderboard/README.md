@@ -1,4 +1,4 @@
-# scrumleaderboard.ui
+# scrumleaderboard
 
 ## Project setup
 ```
