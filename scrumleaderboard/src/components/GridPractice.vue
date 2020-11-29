@@ -1,14 +1,29 @@
 <template>
-        <v-container >
+    <v-app>
+        <v-system-bar app window ></v-system-bar>
+        <v-main>
+            <v-navigation-drawer app>
+                <v-list dense nav>
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+            </v-navigation-drawer>
+        <v-container>
             <v-row>
                 <v-col>
-                    <h4>New</h4>
+                    <h4 id="header">New</h4>
                 </v-col>
                 <v-col>
-                    <h4>Current</h4>
+                    <h4 id="header">Active</h4>
                 </v-col>
                 <v-col>
-                    <h4>Complete</h4>
+                    <h4 id="header">Complete</h4>
                 </v-col>
             </v-row>
             <v-row>
@@ -21,8 +36,8 @@
                 </v-col>
                 <v-col>
                     <br>
-                        <div v-for="currentItem in this.currentItems" :key="currentItem.ID">
-                            <BoardItem v-bind:item="currentItem"/>
+                        <div v-for="activeItem in this.activeItems" :key="activeItem.ID">
+                            <BoardItem v-bind:item="activeItem"/>
                         </div>
                 </v-col>
                 <v-col>
@@ -33,19 +48,25 @@
                 </v-col>
             </v-row>
         </v-container>
+        </v-main>
+    </v-app>
 </template>
+
 
 <style scoped>
    .container {
+         
     border: 1px solid green;
   }
-  /*
-  .row {
+
+    .row {
     border: 1px solid red;
-  }
-  .col {
+     }
+  
+    .col {
     border: 1px solid blue;
-  } */
+    }
+ 
 </style>
 
 
@@ -56,14 +77,19 @@ import axios  from 'axios'
 export default {
   name: 'GridPractice',
   components: {
-    BoardItem
+    BoardItem,
     },
     
  data(){
     return {
         newItems:[],
-        currentItems:[],
-        completedItems:[]
+        activeItems:[],
+        completedItems:[],
+        items: [
+        { title: 'Board Items', icon: 'mdi-view-dashboard' },
+        { title: 'Backlog', icon: 'mdi-image' },
+        { title: 'Help', icon: 'mdi-help-box' },
+      ],
     }
   },
 
@@ -73,9 +99,9 @@ export default {
 
   methods: {
     getApiResult: function () {
-        axios.get("https://localhost:44382/BoardItem/searchByState/current").then((response) => {
+        axios.get("https://localhost:44382/BoardItem/searchByState/active").then((response) => {
             console.log(response.data);
-            this.currentItems=response.data;
+            this.activeItems=response.data;
         })
          
         .catch(error => {
