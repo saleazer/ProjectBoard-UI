@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-      <GridPractice/><br>
+     <GridPractice></GridPractice><br>
   </div>
 </template>
 
 <script>
 import GridPractice from './components/GridPractice'
 
+
+
 export default {
   name: 'App',
   components: {
-    GridPractice
+    GridPractice,
+    
   }
 }
 </script>
@@ -21,12 +24,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #841ff8;
+  color: rgb(39, 39, 39);
   margin-top: 15px;
  
 }
 
-
+#header {
+  text-align: center;
+  text-decoration: underline;
+}
 
 
 </style>
