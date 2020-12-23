@@ -1,20 +1,45 @@
 <template>
   <div id="app">
-     <GridPractice></GridPractice><br>
+            <v-system-bar app window ></v-system-bar>
+
+            <v-navigation-drawer app>
+                <v-list nav>
+          <v-list-item v-for="item in items" :key="item.title" :to="item.link" link>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+            </v-navigation-drawer>
+     <router-view></router-view><br>
   </div>
 </template>
 
 <script>
-import GridPractice from './components/GridPractice'
 
 
 
 export default {
   name: 'App',
   components: {
-    GridPractice,
     
-  }
+  },
+
+ data(){
+    return {
+        newItems:[],
+        activeItems:[],
+        completedItems:[],
+        items: [
+        { title: 'Board Items', icon: 'mdi-view-dashboard', link: '/' },
+        { title: 'Backlog', icon: 'mdi-image', link: '/backlog' },
+        { title: 'Help', icon: 'mdi-help-box', link: '/' },
+      ],
+    }
+  },
 }
 </script>
 

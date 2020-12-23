@@ -3,34 +3,14 @@
         <v-main>
         <v-container>
             <v-row>
-                <v-col>
-                    <h4 id="header">New</h4>
-                </v-col>
-                <v-col>
-                    <h4 id="header">Active</h4>
-                </v-col>
-                <v-col>
-                    <h4 id="header">Complete</h4>
-                </v-col>
+                <h4 id="header">All Board Items</h4>
             </v-row>
             <v-row>
                 <v-col>
                     <br>
-                        <div v-for="newItem in this.newItems" :key="newItem.ID">
-                            <BoardItem v-bind:item="newItem"/>
+                        <div v-for="allItem in this.allItems" :key="allItem.ID">
+                            <BoardItem v-bind:item="allItem"/>
 
-                        </div>
-                </v-col>
-                <v-col>
-                    <br>
-                        <div v-for="activeItem in this.activeItems" :key="activeItem.ID">
-                            <BoardItem v-bind:item="activeItem"/>
-                        </div>
-                </v-col>
-                <v-col>
-                    <br>
-                        <div v-for="completedItem in this.completedItems" :key="completedItem.ID">
-                            <BoardItem v-bind:item="completedItem"/>
                         </div>
                 </v-col>
             </v-row>
@@ -41,18 +21,6 @@
 
 
 <style scoped>
-   .container {
-         
-    border: 1px solid green;
-  }
-
-    .row {
-    border: 1px solid red;
-     }
-  
-    .col {
-    border: 1px solid blue;
-    }
  
 </style>
 
@@ -62,7 +30,7 @@ import BoardItem from './BoardItem'
 import axios  from 'axios'
 
 export default {
-  name: 'GridPractice',
+  name: 'BackLog',
   components: {
     BoardItem,
     },
@@ -72,8 +40,7 @@ export default {
         newItems:[],
         activeItems:[],
         completedItems:[],
-        items: [
-      ],
+        allItems:[],
     }
   },
 
@@ -91,6 +58,7 @@ export default {
         .catch(error => {
             console.log(error.response)
         })
+    
         
         axios.get("https://localhost:44382/BoardItem/searchByState/complete").then((response) => {
             console.log(response.data);
@@ -109,6 +77,18 @@ export default {
         .catch(error => {
             console.log(error.response)
         });
+
+
+
+        axios.get("https://localhost:44382/BoardItem/all").then((response) => {
+            console.log(response.data);
+            this.allItems=response.data;
+        })
+        .catch(error => {
+            console.log(error.response)
+        });
+
+
     }
   }
 }
