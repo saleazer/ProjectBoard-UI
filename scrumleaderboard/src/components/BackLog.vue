@@ -8,10 +8,10 @@
             <v-row>
                 <v-col>
                     <br>
-                        <div v-for="allItem in this.allItems" :key="allItem.ID">
+                        <router-link :to="{path: 'edit/' + allItem.ID}" v-for="allItem in this.allItems" :key="allItem.ID">
                             <BoardItem v-bind:item="allItem"/>
 
-                        </div>
+                        </router-link>
                 </v-col>
             </v-row>
         </v-container>

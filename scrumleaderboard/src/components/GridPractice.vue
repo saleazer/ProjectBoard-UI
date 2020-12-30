@@ -4,34 +4,36 @@
         <v-container>
             <v-row>
                 <v-col>
-                    <h4 id="header">New</h4>
+                    <p id="header">New</p>
                 </v-col>
                 <v-col>
-                    <h4 id="header">Active</h4>
+                    <p id="header">Active</p>
                 </v-col>
                 <v-col>
-                    <h4 id="header">Complete</h4>
+                    <p id="header">Complete</p>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col>
-                    <br>
-                        <div v-for="newItem in this.newItems" :key="newItem.ID">
+                    <div v-for="newItem in this.newItems" :key="newItem.ID">
+                        <router-link :to="{path: 'edit/' + newItem.ID}">
                             <BoardItem v-bind:item="newItem"/>
-
-                        </div>
+                        </router-link>
+                    </div>
                 </v-col>
                 <v-col>
-                    <br>
-                        <div v-for="activeItem in this.activeItems" :key="activeItem.ID">
+                    <div v-for="activeItem in this.activeItems" :key="activeItem.ID">
+                        <router-link :to="{path: 'edit/' + activeItem.ID}">
                             <BoardItem v-bind:item="activeItem"/>
-                        </div>
+                        </router-link>
+                    </div>
                 </v-col>
                 <v-col>
-                    <br>
-                        <div v-for="completedItem in this.completedItems" :key="completedItem.ID">
+                    <div v-for="completedItem in this.completedItems" :key="completedItem.ID">
+                        <router-link :to="{path: 'edit/' + completedItem.ID}">
                             <BoardItem v-bind:item="completedItem"/>
-                        </div>
+                        </router-link>
+                    </div>
                 </v-col>
             </v-row>
         </v-container>
@@ -72,8 +74,7 @@ export default {
         newItems:[],
         activeItems:[],
         completedItems:[],
-        items: [
-      ],
+        
     }
   },
 
