@@ -1,20 +1,31 @@
 <template>
+<v-app>
   <div id="app">
-     <GridPractice></GridPractice><br>
+    <nav><TopPanel/></nav>
+    <nav><NavPanel></NavPanel></nav>
+    <router-view></router-view><br>
   </div>
+</v-app>
 </template>
 
 <script>
-import GridPractice from './components/GridPractice'
-
-
+import TopPanel from './components/TopPanel'
+import NavPanel from './components/NavPanel'
 
 export default {
   name: 'App',
   components: {
-    GridPractice,
-    
-  }
+    TopPanel,
+    NavPanel
+  },
+
+ data(){
+    return {
+        newItems:[],
+        activeItems:[],
+        completedItems:[],
+    }
+  },
 }
 </script>
 
@@ -22,17 +33,9 @@ export default {
 #app {
   font-family: Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: rgb(39, 39, 39);
-  margin-top: 15px;
- 
 }
 
-#header {
-  text-align: center;
-  text-decoration: underline;
-}
+
 
 
 </style>
