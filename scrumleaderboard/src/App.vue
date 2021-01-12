@@ -2,21 +2,20 @@
 <v-app>
   <div id="app">
     <nav><TopPanel/></nav>
-    <nav><NavPanel></NavPanel></nav>
-    <router-view></router-view><br>
+    <div class="ml-2">
+    <router-view></router-view>
+    </div>
   </div>
 </v-app>
 </template>
 
 <script>
 import TopPanel from './components/TopPanel'
-import NavPanel from './components/NavPanel'
 
 export default {
   name: 'App',
   components: {
     TopPanel,
-    NavPanel
   },
 
  data(){
@@ -35,7 +34,14 @@ export default {
   -webkit-font-smoothing: antialiased;
 }
 
+ .routerLink {
+     text-decoration: none;
+ }
 
+#spacingTest {
+    min-height: 100px;
+    padding-right: 20px
+}
 
 
 </style>

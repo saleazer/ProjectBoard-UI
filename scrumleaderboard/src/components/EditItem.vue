@@ -1,50 +1,86 @@
 <template>
     <v-main app>
-        <div>
-            <p>#{{ $route.params.id }}</p>
-            <h1><input v-model="singleItem.Title"></h1>
-        </div>
-        <br>
-        <div>
-            <p>Description</p>
-            <textarea v-model="singleItem.Description"></textarea>
-        </div>
-        <br>
-        <div>
-            <p>Priority</p>
-            <select v-model="singleItem.Priority">
-                <option disabled value="">Please select one</option>
-                <option>Low</option>
-                <option>Normal</option>
-                <option>High</option>
-            </select>
-        </div>
-        <br>
-        <div>
-            <p>State</p>
-            <select v-model="singleItem.State">
-                <option disabled value="">Please select one</option>
-                <option>New</option>
-                <option>Active</option>
-                <option>Complete</option>
-            </select>
-        </div>
-        <br>
-        <br>
-        <div>
-            <button @click='saveBoardItem'>Save</button>
-            <br>
-            <br>
-            <button @click='displayTheItem'>Console.log</button>
-            <br>
-            <br>
-            <button @click='deleteBoardItem'>DELETE</button>
+        <div class="pa-2">
+            <v-card class="py-6" elevation="6">
+                <v-row>
+                    <v-col cols="6">
+                        <div>
+                            <h6>Board Item #{{ $route.params.id }}</h6>
+                            <v-text-field 
+                                v-model="singleItem.Title"
+                            ></v-text-field>
+                        </div>
+                    </v-col>
+                    <v-col cols="6">
+                        <h6><i>Owner</i></h6>
+                        <input v-model="singleItem.OwnerName">
+                    </v-col>
+                    <v-col cols="2">
+                        <div class="py-1">
+                        <v-select
+                            v-model="singleItem.Priority"
+                            :items="itemPriority"
+                            label="Priority"
+                            outlined
+                            dense
+                        ></v-select>
+                        </div>
+                    </v-col>
+                    <v-col cols="2">
+                        <div class="py-1">                  
+                        <v-select 
+                            v-model="singleItem.State"
+                            :items="itemState"
+                            label="State"
+                            outlined
+                            dense
+                        ></v-select>
+                        </div>
+                    </v-col>
+
+                <v-col cols="3">
+                    <div class="pb-2">    
+                    </div>
+                </v-col>
+                </v-row>
+<v-divider></v-divider>
+                <v-row>     
+                    <v-col cols="6">
+                        <h6><i>Description</i></h6>
+                        <div>
+                        <v-text-field v-model="singleItem.Description"></v-text-field>
+                        </div>
+                    </v-col>
+                </v-row>
 
 
-        
+
+                <br>
+                <br>
+                <br>
+            </v-card>
         </div>
+    <br>
+
+        <div>
+        <v-btn class="green" @click='saveBoardItem'>Save</v-btn>
+        <v-btn class="red" @click='deleteBoardItem'>DELETE</v-btn>
+    </div>
     </v-main>
 </template>
+
+
+
+<style scoped>
+
+#textarea {
+    min-width: 250px;
+    min-height: 140px;
+}
+
+
+</style>
+
 
 <script>
 import axios from 'axios'
@@ -56,7 +92,7 @@ export default {
     item: {
       type: Object,
       default: null
-      }
+      },
   },
   
    data(){
@@ -67,8 +103,26 @@ export default {
             Description: "",
             State: "",
             Priority: "",
-            Effort: 0
+            Effort: "0",
+            CreateDate: Date,
+            LastUpdated: Date,
+            Iteration: 0,
+            OwnerName: "",
+            ParentID: ""
+
         },
+
+        itemPriority: [
+            "Low",
+            "Normal",
+            "High"
+        ],
+
+        itemState: [
+            "New",
+            "Active",
+            "Complete"
+        ]
     }
   },
 
@@ -117,10 +171,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-.header {
-    text-align: center;
-}
-
-</style>

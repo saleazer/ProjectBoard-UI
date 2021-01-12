@@ -1,72 +1,59 @@
 <template>
-    <v-app>
-        <v-main>
-        <v-container>
+        <v-main app>
             <v-row>
                 <v-col>
+                    <div>
                     <p id="header">New</p>
-                </v-col>
-                <v-col>
-                    <p id="header">Active</p>
-                </v-col>
-                <v-col>
-                    <p id="header">Complete</p>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <div v-for="newItem in this.newItems" :key="newItem.ID">
-                        <router-link :to="{path: 'edit/' + newItem.ID}">
-                            <BoardItem v-bind:item="newItem"/>
+                    </div>
+                    <div id="spacingTest" v-for="newItem in this.newItems" :key="newItem.ID">
+                        <router-link class="routerLink" :to="{path: 'edit/' + newItem.ID}">
+                            <BoardItem v-bind:item="newItem"/>                       
                         </router-link>
+                    </div>
+                    <br>
+                    <div>
+                      <v-btn outlined color="teal" :to="{path: 'new/'}">New Item</v-btn>
                     </div>
                 </v-col>
                 <v-col>
-                    <div v-for="activeItem in this.activeItems" :key="activeItem.ID">
-                        <router-link :to="{path: 'edit/' + activeItem.ID}">
+                    <p id="header">Active</p>
+
+                    <div id="spacingTest" v-for="activeItem in this.activeItems" :key="activeItem.ID">
+                        <router-link class="routerLink" :to="{path: 'edit/' + activeItem.ID}">
                             <BoardItem v-bind:item="activeItem"/>
                         </router-link>
                     </div>
                 </v-col>
                 <v-col>
-                    <div v-for="completedItem in this.completedItems" :key="completedItem.ID">
-                        <router-link :to="{path: 'edit/' + completedItem.ID}">
+                    <p id="header">Complete</p>
+
+                    <div id="spacingTest" v-for="completedItem in this.completedItems" :key="completedItem.ID">
+                        <router-link class="routerLink" :to="{path: 'edit/' + completedItem.ID}">
                             <BoardItem v-bind:item="completedItem"/>
                         </router-link>
                     </div>
                 </v-col>
             </v-row>
-        </v-container>
         </v-main>
-    </v-app>
 </template>
-
-
 <style scoped>
-   .container {
-         
-    border: 1px solid green;
-  }
 
-    .row {
-    border: 1px solid red;
-     }
-  
-    .col {
-    border: 1px solid blue;
-    }
- 
+
+
+
+
+
 </style>
 
-
 <script>
-import BoardItem from './BoardItem'
 import axios  from 'axios'
+import BoardItem from './BoardItem'
+
 
 export default {
-  name: 'GridPractice',
+  name: 'GridView',
   components: {
-    BoardItem,
+      BoardItem
     },
     
  data(){
