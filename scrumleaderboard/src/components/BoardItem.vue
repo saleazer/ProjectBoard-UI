@@ -1,18 +1,28 @@
 <template>
-   <v-container>  
-      <div v-if="item != null">
-        <v-card id="card" elevation="4" height=100>
-          <v-card-text>{{item.ID}}:{{item.Title}}</v-card-text>
+      <div app v-if="item != null">
+        <v-card :class="`cardSizing item ${item.Priority}`" elevation="5">
+          <v-row wrap>
+            <v-col xs6>
+              <v-card-text class="titleSpacing">{{item.Title}}</v-card-text>
+            </v-col>
+            <v-col  xs6>
+              <div class="right">
+              <v-card-text class="titleSpacing">Owner:</v-card-text>
+              <v-card-text class="titleSpacing">{{item.OwnerName}}</v-card-text>
+              </div>
+            </v-col>
+          </v-row>
         </v-card>
       </div>
-   </v-container>
 </template>
+
+
+
+
 <script>
-
-
 export default {
   name: 'BoardItem',
-  
+ 
   props: {
     item: {
       type: Object,
@@ -30,4 +40,30 @@ export default {
   },
 }
 
+
+
 </script>
+
+
+
+<style>
+.item.Low {
+  border-left: 4px solid blue;
+}
+.item.Normal {
+  border-left: 4px solid green;
+}
+.item.High {
+  border-left: 4px solid red;
+}
+.titleSpacing {
+  padding: 0px;
+  margin-left: 16px;
+}
+
+.cardSizing {
+  min-height: 60px;
+}
+
+
+</style>

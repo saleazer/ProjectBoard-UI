@@ -3,14 +3,15 @@
         <v-main>
         <v-container>
             <v-row>
-                <h4 id="header">All Board Items</h4>
-            </v-row>
-            <v-row>
                 <v-col>
-                    <br>
-                        <router-link :to="{path: 'edit/' + allItem.ID}" v-for="allItem in this.allItems" :key="allItem.ID">
+                    <div>
+                        <h4 id="header">All Board Items</h4>
+                    </div>
+                        <br>
+                        <router-link class="routerLink" :to="{path: 'edit/' + allItem.ID}" v-for="allItem in this.allItems" :key="allItem.ID">
+                            <div class="spacingTest">
                             <BoardItem v-bind:item="allItem"/>
-
+                            </div>
                         </router-link>
                 </v-col>
             </v-row>
@@ -21,7 +22,12 @@
 
 
 <style scoped>
- 
+
+.spacingTest {
+    min-height: 100px;
+    padding-right: 20px
+}
+
 </style>
 
 
