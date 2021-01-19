@@ -8,11 +8,9 @@
                         <h4 id="header">All Board Items</h4>
                     </div>
                         <br>
-                        <router-link class="routerLink" :to="{path: 'edit/' + allItem.ID}" v-for="allItem in this.allItems" :key="allItem.ID">
-                            <div class="spacingTest">
+                            <div class="spacingTest" v-for="allItem in this.allItems" :key="allItem.ID">
                             <BoardItem v-bind:item="allItem"/>
                             </div>
-                        </router-link>
                 </v-col>
             </v-row>
         </v-container>
@@ -32,7 +30,7 @@
 
 
 <script>
-import BoardItem from './BoardItem'
+import BoardItem from '../components/BoardItem'
 import axios  from 'axios'
 
 export default {
@@ -64,8 +62,6 @@ export default {
         .catch(error => {
             console.log(error.response)
         })
-    
-        
         axios.get("https://localhost:44382/BoardItem/searchByState/complete").then((response) => {
             console.log(response.data);
             this.completedItems=response.data;
