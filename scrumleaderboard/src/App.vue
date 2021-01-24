@@ -3,7 +3,10 @@
   <div id="app">
     <nav><TopPanel/></nav>
     <div class="ml-2">
+      
+      <div>
     <router-view></router-view>
+      </div>
     </div>
   </div>
 </v-app>

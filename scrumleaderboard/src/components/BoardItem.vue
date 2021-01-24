@@ -106,9 +106,8 @@ export default {
       axios.put("https://localhost:44382/BoardItem", this.item) 
         .then((response) => {
           console.log(response.data);
-          console.log(this.item);
+          this.$emit("board-update");
           this.close();
-          window.location.reload();
         })
         .catch(error => {
           console.log(error.response)
@@ -119,9 +118,8 @@ export default {
       axios.delete("https://localhost:44382/BoardItem/"+ this.item.ID) 
       .then((response) => {
         console.log(response.data);
-        console.log(this.item);
+        this.$emit("board-update");        
         this.close();
-        window.location.reload();
 
 
       })
@@ -130,8 +128,9 @@ export default {
       })
     },
 
-    close: function() {
+    close: function() {    
       this.dialog = false;
+      this.$emit("board-update");
     },
 
 

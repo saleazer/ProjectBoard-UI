@@ -113,9 +113,9 @@ export default {
             axios.put("https://localhost:44382/BoardItem", this.newItem) 
             .then((response) => {
                 console.log(response.data);
-                console.log(this.newItem);
+                this.$emit("board-update");
                 this.close();
-                window.location.reload();
+                
             })
             .catch(error => {
                 console.log(error.response)
@@ -137,8 +137,8 @@ export default {
                 OwnerName: "",
                 ParentID: ""
             }
-        }
-    }
+        },
+  }
 }
 </script>
 
