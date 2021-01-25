@@ -1,10 +1,10 @@
 <template>
   <nav>
-    <v-system-bar app height="50" color="teal lighten-2 white--text">
+    <v-system-bar app height="50" color="white--text" >
       <v-icon large outlined dark  @click="drawer = !drawer" >mdi-view-dashboard</v-icon>
         <v-row class="pl-2" justify="space-between">
           <v-col>
-            <h2>SLeaderboard</h2>
+            <h2>Project Board</h2>
             <small>v1.0</small>
           </v-col>
           <v-col >
@@ -46,7 +46,7 @@ export default {
       drawer: false,
 
       items: [
-            { title: 'Board Items', icon: 'mdi-view-dashboard', link: '/' },
+            { title: 'Items', icon: 'mdi-view-dashboard', link: '/' },
             { title: 'Backlog', icon: 'mdi-image', link: '/backlog' },
             { title: 'Help', icon: 'mdi-help-box', link: '/help' },       
       ]
