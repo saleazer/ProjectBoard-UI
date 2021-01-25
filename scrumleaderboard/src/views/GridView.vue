@@ -30,7 +30,7 @@
                 </v-col>
                 <v-col>
                     <p id="header">Complete</p>
-            <draggable v-model="completedItems" :options="{group:'new'}" :change="addCompleted" style="min-height: 10px">                    
+            <draggable v-model="completedItems" :options="{group:'new'}" @change="addCompleted" style="min-height: 10px">                    
 
                     <div id="spacingTest" v-for="completedItem in this.completedItems" :key="completedItem.ID">
                             <BoardItem @board-update="getApiResult" v-bind:item="completedItem"/>
