@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-system-bar app height="50" color="white--text" >
+    <v-system-bar app height="50" color="teal lighten-2 white--text" >
       <v-icon large outlined dark  @click="drawer = !drawer" >mdi-view-dashboard</v-icon>
         <v-row class="pl-2" justify="space-between">
           <v-col>
@@ -46,7 +46,8 @@ export default {
       drawer: false,
 
       items: [
-            { title: 'Items', icon: 'mdi-view-dashboard', link: '/' },
+            { title: 'Project Home', icon: 'mdi-view-dashboard', link: '/' },
+            { title: 'All Items', icon: 'mdi-view-dashboard', link: '/items' },
             { title: 'Backlog', icon: 'mdi-image', link: '/backlog' },
             { title: 'Help', icon: 'mdi-help-box', link: '/help' },       
       ]

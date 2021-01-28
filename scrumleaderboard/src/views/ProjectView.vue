@@ -1,44 +1,15 @@
 <template>
         <v-main app >
             <v-row >
-                <v-col>
-                    <div>
-                    <p id="header">New</p>
-                    </div>
-            <draggable v-model="newItems" :options="{group:'new'}" @change="addNew" style="min-height: 10px">                    
-                    <div id="spacingTest" v-for="newItem in this.newItems" :key="newItem.ID">
-                            <BoardItem @board-update="getApiResult" v-bind:item="newItem"/>                       
-
-                    </div>
-            </draggable>                    
-                    <br>
-                    <AddItem @board-update="getApiResult"/>
-
-                    <div>
-                      <v-btn outlined color="teal" :to="{path: 'new/'}">New Item</v-btn>
-                    </div>
-                </v-col>
-                <v-col>
-                    <p id="header">Active</p>
-            <draggable v-model="activeItems" :options="{group:'new'}" @change="addActive" style="min-height: 10px">                    
-
-                    <div id="spacingTest" v-for="activeItem in this.activeItems" :key="activeItem.ID">
-                            <BoardItem @board-update="getApiResult" v-bind:item="activeItem"/>
-                    </div>
-            </draggable>                    
-
-                </v-col>
-                <v-col>
-                    <p id="header">Complete</p>
-            <draggable v-model="completedItems" :options="{group:'new'}" @change="addCompleted" style="min-height: 10px">                    
-
-                    <div id="spacingTest" v-for="completedItem in this.completedItems" :key="completedItem.ID">
-                            <BoardItem @board-update="getApiResult" v-bind:item="completedItem"/>
-                    </div>
-            </draggable>                    
-
-                </v-col>
+                <div class="pt-2 pl-5">
+                    <p>ID#{{ $route.params.id }}</p>
+                    <h3></h3>
+                </div>
             </v-row>
+            <br>
+                    <AddItem style="max-height: 35px" />
+
+
         </v-main>
 </template>
 
@@ -47,17 +18,13 @@
 
 <script>
 import axios  from 'axios'
-import draggable from 'vuedraggable'
-import BoardItem from '../components/BoardItem'
 import AddItem from '../components/AddItem'
 
 export default {
-    name: 'GridView',
+    name: 'ProjectView',
 
     components: {
-        BoardItem,
         AddItem,
-        draggable
     },
 
     data(){
@@ -65,6 +32,7 @@ export default {
             newItems:[],
             activeItems:[],
             completedItems:[],
+            allChildItems: [],
             
 
             itemPriority: [
@@ -91,6 +59,16 @@ export default {
 },
     methods: {
         getApiResult: function () {
+        axios.get("https://localhost:44382/BoardItem/searchByParentID/" + this.$route.params.id).then((response) => {
+            console.log(response.data);
+            this.allChildItems=response.data;
+        })
+        .catch(error => {
+            console.log(error.response)
+        })
+    },
+
+/*        getApiResult: function () {
             axios.get("https://localhost:44382/BoardItem/searchByState/active").then((response) => {
                 console.log(response.data);
                 this.activeItems=response.data;
@@ -113,6 +91,7 @@ export default {
                 console.log(error.response)
             });
         },
+        */
         itemMoved: function (evt, state){
              if (evt.added != undefined){
                 evt.added.element.State = state;
