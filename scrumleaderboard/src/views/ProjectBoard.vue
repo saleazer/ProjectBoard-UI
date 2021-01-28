@@ -1,0 +1,117 @@
+<template>
+    <v-app>
+        <v-main>
+        <v-container>
+            <v-row>
+                <v-col>
+                    <div>
+                        <h4 id="welcome">Welcome <i>{user}</i>, what will you accomplish today?</h4>
+                    </div>
+                        <br>
+                        <div id="buttonSpace">
+                            <AddProject/>
+
+                        </div>
+                        <br>
+                        <div>
+                            <h5>    Current Projects</h5>
+                        </div>
+                        <br>
+                        <div class="spacingTest" v-for="project in this.allProjects" :key="project.ID">
+                            <router-link class="cleanText" :to="{path: 'projects/' + project.ID}">
+                              <ProjectCard @board-update="getApiResult" v-bind:item="project"/>
+                            </router-link>
+
+                        </div>
+
+
+
+<!--
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+                </v-col>
+            </v-row>
+        </v-container>
+        </v-main>
+    </v-app>
+</template>
+
+
+<style scoped>
+
+/*  TODO: Rename styles    */
+.spacingTest {
+    min-height: 100px;
+    padding-right: 20px;
+}
+
+.cleanText {
+    text-decoration: none;
+}
+
+#buttonSpace {
+    max-height: 35px;
+    justify-self: left;
+}
+
+#welcome {
+    padding-top: 10px;
+    min-height: 45px;
+}
+</style>
+
+
+<script>
+import ProjectCard from '../components/ProjectCard'
+import axios  from 'axios'
+import AddProject from '../components/AddProject.vue'
+
+export default {
+  name: 'ProjectBoard',
+  components: {
+    ProjectCard,
+    AddProject
+    },
+    
+ data(){
+
+    return {
+        allProjects:[],
+    }
+  },
+
+ mounted(){
+    this.getApiResult()
+  },
+
+  methods: {
+    getApiResult: function () {
+            axios.get("https://localhost:44382/BoardItem/searchByItemType/Project").then((response) => {
+                console.log(response.data);
+                this.allProjects=response.data;
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
+        },
+
+
+
+    },
+
+
+
+  
+}
+</script>

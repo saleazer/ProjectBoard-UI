@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import GridView from '../views/GridView.vue'
 import BackLog from '../views/BackLog.vue'
 import HelpPage from '../views/HelpPage.vue'
+import ProjectBoard from '../views/ProjectBoard.vue'
+import ProjectView from '../views/ProjectView'
 
 Vue.use(VueRouter)
 
@@ -10,8 +12,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: GridView
+    component: ProjectBoard
   },
+  {
+    path: '/items',
+    name: 'Item Home',
+    component: GridView,
+    
+  },  
 
   {
     path: '/backlog',
@@ -25,7 +33,15 @@ const routes = [
     name: 'Help Page',
     component: HelpPage,
     
+  },
+
+  {
+  path: '/projects/:id',
+  name: 'Project View',
+  component: ProjectView,
   }
+
+  
 
 ]
 
