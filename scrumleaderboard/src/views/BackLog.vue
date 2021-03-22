@@ -8,7 +8,7 @@
                         <h4 id="header">All Board Items</h4>
                     </div>
                         <br>
-                            <div class="spacingTest" v-for="allItem in this.allItems" :key="allItem.ID">
+                            <div v-for="allItem in this.allItems" :key="allItem.ID">
                                 <BoardItem @board-update="getApiResult" v-bind:item="allItem"/>
                             </div>
                 </v-col>
@@ -52,7 +52,7 @@ export default {
 
   methods: {
     getApiResult: function () {
-        axios.get("https://localhost:44382/BoardItem/all").then((response) => {
+        axios.get("//localhost:8089/board-item").then((response) => {
             console.log(response.data);
             this.allItems=response.data;
         })

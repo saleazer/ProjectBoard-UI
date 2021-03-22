@@ -4,7 +4,7 @@
         <v-row>
             <v-dialog v-model="dialog" persistent max-width="900px">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn color="teal lighten-2 white--text" dark v-bind="attrs" v-on="on">
+                    <v-btn color="grey darken-1 white--text" dark v-bind="attrs" v-on="on">
                     New Project
                     </v-btn>
                 </template>

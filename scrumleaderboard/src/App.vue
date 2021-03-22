@@ -23,9 +23,6 @@ export default {
 
  data(){
     return {
-        newItems:[],
-        activeItems:[],
-        completedItems:[],
     }
   },
 }
@@ -35,6 +32,7 @@ export default {
 #app {
   font-family: Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
 }
 
  .routerLink {

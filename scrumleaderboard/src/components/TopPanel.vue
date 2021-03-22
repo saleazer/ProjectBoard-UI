@@ -1,28 +1,30 @@
 <template>
   <nav>
-    <v-system-bar app height="50" color="teal lighten-2 white--text" >
-      <v-icon large outlined dark  @click="drawer = !drawer" >mdi-view-dashboard</v-icon>
-        <v-row class="pl-2" justify="space-between">
+    <v-app-bar app color="teal lighten-4" dense>
+        <v-row class="pl-2" justify="space-between" align="center">
+                <v-icon large @click="drawer = !drawer" color="grey darken-3">mdi-view-dashboard</v-icon>
+
           <v-col>
-            <h2>Project Board</h2>
-            <small>v1.0</small>
+            <h4>Project Board</h4><small>v1.0</small>
+              <small></small>
           </v-col>
-          <v-col >
-            <v-btn small outlined color="white">
-              <v-icon color="white">mdi-login</v-icon>
+          <v-col offset-sm="6">
+            <v-btn small outlined color="grey darken-4">
+              <v-icon color="grey darken-4">mdi-login</v-icon>
               LOGIN
             </v-btn>
           </v-col>
         </v-row>
-    </v-system-bar>
+    </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app color="teal lighten-1">
-      <v-list>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.link" link>
-            <v-icon color="white">{{item.icon}}</v-icon>
+    <v-navigation-drawer v-model="drawer" app color="#1c1c1c">
+
+      <v-list dense>
+        <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link>
+            <v-icon color="teal">{{item.icon}}</v-icon>
             <!-- TODO: find vuetify way to color v-list text white -->
             <v-list-item>
-              <label style="color:white">
+              <label style="color:#dedede">
               {{item.title}}
               </label>
             </v-list-item>
@@ -43,7 +45,7 @@ export default {
   
   data(){
     return {
-      drawer: false,
+      drawer: true,
 
       items: [
             { title: 'Project Home', icon: 'mdi-view-dashboard', link: '/' },

@@ -1,47 +1,29 @@
 <template>
     <v-app>
-        <v-main>
+        <v-main >
         <v-container>
-            <v-row>
-                <v-col>
-                    <div>
-                        <h4 id="welcome">Welcome <i>{user}</i>, what will you accomplish today?</h4>
-                    </div>
-                        <br>
-                        <div id="buttonSpace">
-                            <AddProject/>
-
-                        </div>
+                <div>
+                    <h4 id="welcome">Welcome <i>{user}</i>, what will you accomplish today?</h4>
+                </div>
+                <v-row>
+                <v-col cols="6">
                         <br>
                         <div>
-                            <h5>    Current Projects</h5>
+                            <h5>Current Projects: {{this.allProjects.length}}</h5>
                         </div>
                         <br>
                         <div class="spacingTest" v-for="project in this.allProjects" :key="project.ID">
                             <router-link class="cleanText" :to="{path: 'projects/' + project.ID}">
                               <ProjectCard @board-update="getApiResult" v-bind:item="project"/>
                             </router-link>
-
                         </div>
-
-
-
-<!--
-
-
--->
-
-
-
-
-
-
-
-
-
-
+                        <div id="buttonSpace">
+                        </div>
                 </v-col>
             </v-row>
+            <br>
+                                        <AddProject/>
+
         </v-container>
         </v-main>
     </v-app>
@@ -52,9 +34,10 @@
 
 /*  TODO: Rename styles    */
 .spacingTest {
-    min-height: 100px;
+    min-height: 60px;
     padding-right: 20px;
 }
+
 
 .cleanText {
     text-decoration: none;
@@ -97,7 +80,7 @@ export default {
 
   methods: {
     getApiResult: function () {
-            axios.get("https://localhost:44382/BoardItem/searchByItemType/Project").then((response) => {
+            axios.get("https://localhost:44374/Project/all").then((response) => {
                 console.log(response.data);
                 this.allProjects=response.data;
             })
@@ -105,6 +88,8 @@ export default {
                 console.log(error.response)
             })
         },
+
+    
 
 
 

@@ -2,15 +2,15 @@
   <div app v-if="item != null">
     <v-dialog v-model="dialog" persistent max-width="900px">
       <template v-slot:activator="{ on, attrs }">
-        <v-card :class="`cardSizing item ${item.Priority}`" elevation="5"  v-bind="attrs" v-on="on">
+        <v-card :class="`cardSizing item ${item.Priority}`" outlined v-bind="attrs" v-on="on">
           <v-row wrap>
             <v-col>
-              <v-card-text class="titleSpacing">{{item.Title}}</v-card-text>
+              <v-card-text class="titleSpacing">{{item.title}}</v-card-text>
             </v-col>
             <v-col>
               <div class="right">
-                <v-card-text class="titleSpacing">Owner:</v-card-text>
-                <v-card-text class="titleSpacing">{{item.OwnerName}}</v-card-text>
+                <v-card-text class="titleSpacing"></v-card-text>
+                <v-card-text class="titleSpacing">{{item.description}}</v-card-text>
               </div>
             </v-col>
           </v-row>
@@ -18,7 +18,7 @@
       </template>
       <v-card>
         <v-card-title>
-            <span class="headline">Add New Item</span>
+            <span class="headline">Edit Item</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -103,7 +103,7 @@ export default {
 
   methods: {
     saveBoardItem: function () {
-      axios.put("https://localhost:44382/BoardItem", this.item) 
+      axios.put("https://localhost:44374/BoardItem", this.item) 
         .then((response) => {
           console.log(response.data);
           this.$emit("board-update");
@@ -115,7 +115,7 @@ export default {
     },
 
     deleteBoardItem: function () {
-      axios.delete("https://localhost:44382/BoardItem/"+ this.item.ID) 
+      axios.delete("https://localhost:44374/BoardItem/"+ this.item.ID) 
       .then((response) => {
         console.log(response.data);
         this.$emit("board-update");        
@@ -136,20 +136,11 @@ export default {
 
 
   }
-
-
-
-
-
-
-
-
-
 }
 </script>
 <style>
 .item.Low {
-  border-left: 4px solid blue;
+  border-left: 4px solid lightblue;
 }
 .item.Normal {
   border-left: 4px solid green;
