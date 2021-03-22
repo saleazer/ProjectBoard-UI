@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
-    <v-app>
-        <v-row justify="center">
+  <div>
+    <v-container>
+        <v-row >
             <v-dialog v-model="dialog" persistent max-width="900px">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn color="teal lighten-2 white--text" dark v-bind="attrs" v-on="on">
+                    <v-btn small color="grey darken-2 white--text" dark v-bind="attrs" v-on="on">
                     New Item
                     </v-btn>
                 </template>
@@ -28,20 +28,26 @@
                                 <v-textarea v-model="newItem.Description" label="Description" color="secondary">
                                 </v-textarea>                    
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="3">
                                 <v-select v-model="newItem.Priority" :items="itemPriority" hint="Item Priority"
                                     persistent-hint single-line dense color="secondary">
                                 </v-select>
                             </v-col>
-                            <v-col cols="4">
-                                <v-select v-model="newItem.Effort" :items="itemEffort" hint="Item Effort"
+                            <v-col cols="3">
+                                <v-select v-model="newItem.Effort" :items="itemEffort"
+                                 hint="Item Effort" 
                                     persistent-hint single-line dense color="secondary">
                                 </v-select>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="3">
                                 <v-select v-model="newItem.State" :items="itemState" hint="Item State"
                                     persistent-hint single-line dense color="secondary">
                                 </v-select>
+                            </v-col>
+                            <v-col cols="3">
+                            <v-select :items="this.allProjects.Name" hint="ProjectID"
+                                persistent-hint single-line dense color="secondary">
+                            </v-select>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -50,16 +56,16 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="teal lighten-2 white--text" outlined @click="close">
-                    Close
+                        Close
                     </v-btn>
                     <v-btn color="teal lighten-2 white--text" outlined @click='saveBoardItem'>
-                    Save
+                        Save
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
         </v-row>
-    </v-app>
+        </v-container>
   </div>
 </template>
 
@@ -78,39 +84,38 @@ export default {
   },
     data(){
         return {
+            allProjects: [],
             newItem: {
                 ID: 0,
                 ItemType: "Task",
                 Title: "",
                 Description: "",
-                State: "",
-                Priority: "",
-                Effort: "0",
+                State: "New",
+                Priority: "Low",
+                Effort: "Low",
                 CreateDate: Date,
                 LastUpdated: Date,
                 Iteration: 0,
                 OwnerName: "",
-                ParentID: ""
+                ParentID: this.$route.params.id,
             },
             itemPriority: [
-                "Low",
-                "Normal",
-                "High"
+                "Low", "Normal", "High"
             ],
             itemState: [
-                "New",
-                "Active",
-                "Complete"
+                "New", "Active", "Complete"
             ],
             itemEffort: [               
-                "1","2","3","4","5","6","7","8","9","10",
+                "Low", "Normal", "High"
             ],
             dialog: false,
         }
     },
+    mounted() {
+    },
     methods: {
         saveBoardItem: function () {
-            axios.put("https://localhost:44382/BoardItem", this.newItem) 
+            axios.put("https://localhost:44374/BoardItem", this.newItem) 
             .then((response) => {
                 console.log(response.data);
                 this.$emit("board-update");
@@ -138,8 +143,10 @@ export default {
                 ParentID: ""
             }
         },
+
+    },
   }
-}
+
 </script>
 
 <style scoped>

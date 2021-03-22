@@ -14,9 +14,6 @@
                     <br>
                     <AddItem @board-update="getApiResult"/>
 
-                    <div>
-                      <v-btn outlined color="teal" :to="{path: 'new/'}">New Item</v-btn>
-                    </div>
                 </v-col>
                 <v-col>
                     <p id="header">Active</p>
@@ -91,21 +88,21 @@ export default {
 },
     methods: {
         getApiResult: function () {
-            axios.get("https://localhost:44382/BoardItem/searchByState/active").then((response) => {
+            axios.get("https://localhost:44374/BoardItem/searchByState/active").then((response) => {
                 console.log(response.data);
                 this.activeItems=response.data;
             })
             .catch(error => {
                 console.log(error.response)
             })
-            axios.get("https://localhost:44382/BoardItem/searchByState/complete").then((response) => {
+            axios.get("https://localhost:44374/BoardItem/searchByState/complete").then((response) => {
                 console.log(response.data);
                 this.completedItems=response.data;
             })
             .catch(error => {
                 console.log(error.response)
             });
-            axios.get("https://localhost:44382/BoardItem/searchByState/New").then((response) => {
+            axios.get("https://localhost:44374/BoardItem/searchByState/New").then((response) => {
                 console.log(response.data);
                 this.newItems=response.data;
             })
@@ -129,7 +126,7 @@ export default {
             this.itemMoved(evt, "Complete");
         },
         saveBoardItem: function (item) {
-            axios.put("https://localhost:44382/BoardItem", item) 
+            axios.put("https://localhost:44374/BoardItem", item) 
             .then((response) => {
                 console.log(response.data);
             })
