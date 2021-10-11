@@ -3,13 +3,13 @@
         <v-main >
         <v-container>
                 <div>
-                    <h4 id="welcome">Welcome <i>{user}</i>, what will you accomplish today?</h4>
+                    <h4 id="welcome">Welcome {user}, what will you accomplish today?</h4>
                 </div>
                 <v-row>
                 <v-col cols="6">
                         <br>
                         <div>
-                            <h5>Current Projects: {{this.allProjects.length}}</h5>
+                            <h5><i>Current Projects: {{this.allProjects.length}}</i></h5>
                         </div>
                         <br>
                         <div class="spacingTest" v-for="project in this.allProjects" :key="project.ID">
