@@ -51,6 +51,7 @@
 #welcome {
     padding-top: 10px;
     min-height: 45px;
+    color: #265B5F;
 }
 </style>
 
